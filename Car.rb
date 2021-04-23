@@ -1,5 +1,4 @@
-class Car
-
+class Car 
   attr_reader :start_time
   attr_accessor :pickup_time, :car_time
 
