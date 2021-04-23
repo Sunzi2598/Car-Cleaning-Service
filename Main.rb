@@ -1,4 +1,4 @@
-require_relative 'Service.rb'
+require_relative 'service.rb'
 
 service = Service.new
 
@@ -10,7 +10,7 @@ command = gets.chomp
 until command == "exit"
 	case command
   when "add"
-    puts service.add_car()
+    puts service.add_car
   else 
     puts "Type your command again.\n"
   end

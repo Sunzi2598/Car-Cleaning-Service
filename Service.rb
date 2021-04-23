@@ -1,4 +1,4 @@
-require_relative 'Car.rb'
+require_relative 'car.rb'
 
 class Service 
   
@@ -19,7 +19,7 @@ class Service
       calculate_pickup(car)
       @worker1.push(car)
       return
-    elsif @worker2.empty?
+		elsif @worker2.empty?
       car.car_time = car.start_time
       calculate_pickup(car)
       @worker2.push(car)
@@ -32,6 +32,7 @@ class Service
       @worker1.push(car)
 			return
     end
+		
     if @worker2.last.pickup_time < car.start_time
       car.car_time = car.start_time
       calculate_pickup(car)
@@ -55,20 +56,23 @@ class Service
 		pickup = car.car_time
     pickup += CAR_CLEANING_TIME * 60
 		if pickup.saturday?
+			
 			if pickup.hour < CLOSE_SATURDAY || pickup.hour == CLOSE_SATURDAY && pickup.min == 0
 		      car.pickup_time = pickup
 		  else
-		      #finish monday
+		      #monday
 		      pickup += 24 * 3600
 		      pickup += 16 * 3600
 		      car.pickup_time = pickup
 		  end
 
 		else
+			
 				if pickup.hour < CLOSE_SERVICE || pickup.hour == CLOSE_SERVICE && pickup.min == 0
     			#today
       		car.pickup_time = pickup
 				else 
+					
 					#next day is saturday
 					if (pickup + 24 * 3600).saturday?
         		pickup += 14 * 3600
@@ -82,7 +86,7 @@ class Service
 		end
   end
 		
-  def add_car()
+  def add_car
   	new_car = Car.new
     pickup(new_car)
     new_car.pickup_time.strftime("%A %d-%m-%Y %H:%M")
